@@ -2,18 +2,19 @@
 // return the only number in the range that is missing from the array.
 
 import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.HashSet;
+import java.util.Set;
 
 class Solution {
     public int missingNumber(int[] nums) {
         int n = nums.length;
         int sum = Arrays.stream(nums).sum();
-        // range should be inclusive
-        List<Integer> expected_nums = IntStream.rangeClosed(0, n)
-                .boxed()
-                .collect(Collectors.toList());
+        Set<Integer> expected_nums = new HashSet<>();
+
+        // new ordered list with no duplicates
+        for (int i=0; i<=n; i++) {
+            expected_nums.add(i);
+        }
 
         int expected_sum = 0;
         for (int num : expected_nums) {
