@@ -3,18 +3,21 @@
 // You may assume that each input would have exactly one solution,
 // and you may not use the same element twice.
 
+import java.util.HashMap;
+
 class TwoSum
 {
     public int[] Solution(int[] nums, int target){
-        final int l = nums.length;
 
-        for (int i = 0; i < l; i++) {
-            for (int j = i + 1; j < l; j++) {
-                    if (nums[j] + nums[i] == target){
-                        int[] positions = new int[] {i,j};
-                        return positions;
-                }
+        HashMap<Integer, Integer> nums_map = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+
+            if (nums_map.containsKey(complement)) {
+                return new int[] {nums_map.get(complement), i};
             }
+            nums_map.put(nums[i], i);
         }
         return new int[] {};
     }
