@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-class Solution {
+class FindMissingNums {
     public List<Integer> findDisappearedNumbers(int[] nums) {
         int n = nums.length;
 
