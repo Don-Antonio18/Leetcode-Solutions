@@ -4,30 +4,19 @@
 
 // Return the maximum profit you can achieve from this transaction. If you cannot achieve any profit, return 0
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-
-public class BstTimeToBuyNSellStock {
+class BstTimeToBuyNSellStock {
     public int maxProfit(int[] prices) {
 
-        ArrayList<Integer> priceList = Arrays.stream(prices)
-                .boxed() // Converts int to Integer
-                .collect(Collectors.toCollection(ArrayList::new));
+        int left = 0, bestProfit = 0;
 
-        // find index of smallest number
-        int minPrice = Collections.min(priceList);
-        int indexOfMin = priceList.indexOf(minPrice);
-
-        // Split list from smallest number
-        List<Integer> profits = priceList.subList(indexOfMin, priceList.size());
-
-        // Find largest num in profits list
-        int maxProfit = Collections.max(profits);
-        
-        if (maxProfit <= minPrice) return 0;
-        return maxProfit-minPrice;
+        for (int right = 1; right < prices.length; right++) {
+            if (prices[right] < prices[left]) {
+                // Updates the minimum leftmost value
+                left = right;
+            } else {
+                bestProfit = Math.max(bestProfit, prices[right] - prices[left]);
+            }
+        }
+        return bestProfit;
     }
 }
